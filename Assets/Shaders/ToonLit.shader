@@ -61,23 +61,99 @@ Shader "Custom/ToonLit"
                 Light mainLight = GetMainLight();
                 float3 lightDir = normalize(mainLight.direction);
                 float3 normal   = normalize(IN.normalWS);
-            
-                float NdotL = dot(normal, lightDir);
-            
+
                 // Three-tone stepping
+                float NdotL = dot(normal, lightDir);
                 float lit;
                 if (NdotL > 0.3)       lit = 1.0;   // fully lit
                 else if (NdotL > -0.1) lit = 0.5;   // midtone
                 else                   lit = 0.0;   // shadow
-            
+
                 float3 baseColor = lerp(_BaseColor.rgb, IN.vertexColor.rgb, _UseVertexColor);
-            
-                float3 midColor = (_LitColor.rgb + _ShadowColor.rgb) * 0.5;
+
                 float3 finalTint = lerp(_ShadowColor.rgb, _LitColor.rgb, lit);
-            
                 float3 finalColor = baseColor * finalTint;
-            
+
                 return half4(finalColor, 1.0);
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+
+            ZWrite On
+            ColorMask R
+
+            HLSLPROGRAM
+            #pragma vertex DepthOnlyVertex
+            #pragma fragment DepthOnlyFragment
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes
+            {
+                float4 position : POSITION;
+            };
+
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+            };
+
+            Varyings DepthOnlyVertex(Attributes input)
+            {
+                Varyings output;
+                output.positionCS = TransformObjectToHClip(input.position.xyz);
+                return output;
+            }
+
+            half DepthOnlyFragment(Varyings input) : SV_TARGET
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "DepthNormals"
+            Tags { "LightMode"="DepthNormals" }
+
+            ZWrite On
+
+            HLSLPROGRAM
+            #pragma vertex DepthNormalsVertex
+            #pragma fragment DepthNormalsFragment
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS   : NORMAL;
+            };
+
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+                float3 normalWS   : TEXCOORD0;
+            };
+
+            Varyings DepthNormalsVertex(Attributes input)
+            {
+                Varyings output;
+                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                return output;
+            }
+
+            half4 DepthNormalsFragment(Varyings input) : SV_TARGET
+            {
+                float3 normalWS = normalize(input.normalWS);
+                return half4(normalWS * 0.5 + 0.5, 0);
             }
             ENDHLSL
         }
