@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: lambert2SG
+  m_Name: CloudMat
   m_Shader: {fileID: 4800000, guid: 7805de57babca674c97d5a590374e65d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -98,7 +98,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.100000024
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -107,7 +107,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShadowThreshold: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.100000024
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -120,14 +120,14 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.8156863, g: 0.85490197, b: 0.8666667, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.982207, g: 0.98669523, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _LitColor: {r: 0.41568628, g: 0.45490196, b: 0.53333336, a: 1}
     - _ShadowColor: {r: 0.101960786, g: 0.14117648, b: 0.2509804, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6346791748276690632
+--- !u!114 &8266949731143822273
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c1c5a22727b3d945b1e5a5b21669b54
+guid: 7ff3058ec50ee0948b86f0713303a35c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert2SG
-    second: {fileID: 2100000, guid: 779cf0d50e070a0479d0468051a48a26, type: 2}
+      name: CloudMat
+    second: {fileID: 2100000, guid: 699aca3efeafbb740bf9b612053abd93, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
